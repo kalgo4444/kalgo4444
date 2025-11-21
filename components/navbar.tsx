@@ -40,7 +40,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <div className="hidden md:flex absolute md:right-1/2 md:translate-x-1/2 items-center gap-6 text-sm font-bold">
           <Link href="#hero" className="hover:text-primary transition-colors">
             Home
           </Link>
