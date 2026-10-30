@@ -7,11 +7,11 @@ Full-stack engineer and university student building web, mobile, and AI-powered 
 ## Stack
 
 - **Languages:** JavaScript, TypeScript
-- **Front end:** React, Next.js
-- **Mobile:** React Native
-- **Back end:** NestJS, REST APIs
-- **Databases:** PostgreSQL
+- **Front end:** React.js, Next.js
+- **Mobile:** React Native (Expo)
+- **Back end:** NodeJS, NestJS, REST APIs
+- **Databases:** PostgreSQL, SQLite
 
 ## Skills
 
-Front-end UI · REST API · Back-end projects · AI
+Web Development · Full-Stack Engineering · Software Engineer · AI
