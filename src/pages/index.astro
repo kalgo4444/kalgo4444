@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/profile';
+
+const github = profile.links.find(link => link.label === 'GitHub');
+---
+
+<Layout title={`${profile.name} · ${profile.role}`} description={profile.summary}>
+	<section class="hero container">
+		<p class="intro">{profile.name} · {profile.role} · {profile.location}</p>
+		<h1>{profile.headline}</h1>
+		<p class="lede">
+			I'm {profile.firstName}, a software engineer and university student. I work in TypeScript
+			from the interface down to the database.
+		</p>
+		<div class="actions">
+			<a class="btn btn-primary" href="/contact">Contact me</a>
+			{
+				github && (
+					<a class="btn btn-secondary" href={github.href}>
+						GitHub <span aria-hidden="true">-&gt;</span>
+					</a>
+				)
+			}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	/* Takes the space under the nav, with its content centred in it. */
+	.hero {
+		display: flex;
+		flex: 1 0 auto;
+		flex-direction: column;
+		justify-content: center;
+		padding-block: var(--space-section);
+		animation: hero-enter 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
+	@keyframes hero-enter {
+		from {
+			opacity: 0.4;
+			transform: translateY(6px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.intro {
+		margin-bottom: var(--space-xl);
+		color: var(--mute);
+		font-size: 14px;
+		line-height: 2;
+	}
+
+	h1 {
+		max-width: 22em;
+		color: var(--ink);
+		font-size: 38px;
+		font-weight: 700;
+		line-height: 1.5;
+		text-wrap: balance;
+	}
+
+	.lede {
+		max-width: 62ch;
+		margin-top: var(--space-lg);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-md);
+		margin-top: var(--space-xxl);
+	}
+
+	@media (max-width: 640px) {
+		h1 {
+			font-size: 28px;
+		}
+	}
+</style>

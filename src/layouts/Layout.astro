@@ -1,0 +1,60 @@
+---
+import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import PulseBeams from '../components/PulseBeams.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#fdfcfc" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<Font cssVariable="--font-mono" preload />
+		<title>{title}</title>
+		<ClientRouter />
+		<script is:inline>
+			(function () {
+				function applyTheme() {
+					try {
+						const stored = localStorage.getItem('theme');
+						// Default mode is light
+						const theme = stored === 'dark' ? 'dark' : 'light';
+						document.documentElement.setAttribute('data-theme', theme);
+						const meta = document.querySelector('meta[name="theme-color"]');
+						if (meta) {
+							meta.setAttribute('content', theme === 'dark' ? '#201d1d' : '#fdfcfc');
+						}
+					} catch (e) {
+						document.documentElement.setAttribute('data-theme', 'light');
+					}
+				}
+				applyTheme();
+				document.addEventListener('astro:after-swap', applyTheme);
+			})();
+		</script>
+	</head>
+	<body>
+		<PulseBeams />
+		<Nav />
+
+		<main transition:animate="fade">
+			<slot />
+		</main>
+	</body>
+</html>

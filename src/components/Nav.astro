@@ -1,0 +1,416 @@
+---
+import PixelWord from './PixelWord.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { profile } from '../data/profile';
+
+const desktopLinks = [
+	{ label: 'About', href: '/about' },
+	{ label: 'Skills', href: '/skills' },
+	{ label: 'Stack', href: '/stack' },
+	...(profile.projects.length ? [{ label: 'Projects', href: '/projects' }] : []),
+];
+
+const mobileLinks = [
+	{ label: 'Home', href: '/', icon: 'home' },
+	{ label: 'About', href: '/about', icon: 'about' },
+	{ label: 'Skills', href: '/skills', icon: 'skills' },
+	{ label: 'Stack', href: '/stack', icon: 'stack' },
+	...(profile.projects.length ? [{ label: 'Projects', href: '/projects', icon: 'projects' }] : []),
+];
+
+// Built pages are served with a trailing slash, the dev server without one.
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const current = (href: string) => (href !== '/' && path === href ? 'page' : undefined);
+
+// The wordmark's text; the brand link's accessible name has to include it.
+const wordmark = 'Abu';
+---
+
+<header class="nav" transition:name="nav">
+	<div class="nav-inner">
+		<a class="brand" href="/" aria-label={`${wordmark}, home`}>
+			<span class="brand-badge" aria-hidden="true">
+				<svg class="brand-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 19V5M5 12l7-7 7 7" />
+				</svg>
+			</span>
+			<span class="brand-wordmark">
+				<PixelWord text={wordmark} label={wordmark} />
+			</span>
+		</a>
+
+		<div class="nav-right">
+			<nav class="links" aria-label="Primary">
+				{desktopLinks.map(link => <a href={link.href} aria-current={current(link.href)}>{link.label}</a>)}
+			</nav>
+
+			<div class="nav-actions">
+				<ThemeToggle />
+				<a class="btn btn-primary btn-contact" href="/contact" aria-current={current('/contact')}>Contact</a>
+			</div>
+		</div>
+	</div>
+</header>
+
+<nav class="mobile-dock" aria-label="Primary" transition:name="mobile-dock">
+	<div class="dock-container">
+		{
+			mobileLinks.map(link => (
+				<a
+					href={link.href}
+					class:list={['dock-tab', { active: path === link.href }]}
+					aria-current={current(link.href)}
+					aria-label={link.label}
+				>
+					{link.icon === 'home' && (
+						<svg class="dock-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+							<path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+						</svg>
+					)}
+					{link.icon === 'about' && (
+						<svg class="dock-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+							<circle cx="12" cy="7" r="4" />
+						</svg>
+					)}
+					{link.icon === 'skills' && (
+						<svg class="dock-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="16 18 22 12 16 6" />
+							<polyline points="8 6 2 12 8 18" />
+						</svg>
+					)}
+					{link.icon === 'stack' && (
+						<svg class="dock-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.9a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+							<path d="m22 12.5-8.58 3.9a2 2 0 0 1-1.66 0L2 12.5" />
+							<path d="m22 17.5-8.58 3.9a2 2 0 0 1-1.66 0L2 17.5" />
+						</svg>
+					)}
+					{link.icon === 'projects' && (
+						<svg class="dock-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+							<circle cx="12" cy="13" r="2" />
+							<path d="M14 13h3" />
+							<path d="M7 13h3" />
+						</svg>
+					)}
+					<span class="dock-label">{link.label}</span>
+				</a>
+			))
+		}
+	</div>
+</nav>
+
+<style>
+	.nav {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		width: 100%;
+		padding: 14px var(--gutter) 8px;
+		pointer-events: none;
+		transition: padding 0.2s ease;
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+		width: 100%;
+		max-width: var(--column);
+		margin: 0 auto;
+		height: 52px;
+		padding: 6px 8px 6px 12px;
+		background: var(--nav-bar-bg);
+		border: 1px solid var(--nav-bar-border);
+		border-radius: 12px;
+		box-shadow: var(--nav-bar-shadow);
+		backdrop-filter: blur(20px) saturate(180%);
+		-webkit-backdrop-filter: blur(20px) saturate(180%);
+		pointer-events: auto;
+		transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 4px 6px;
+		border-radius: 8px;
+		color: var(--ink);
+		text-decoration: none;
+		user-select: none;
+		-webkit-user-select: none;
+		transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.brand:hover {
+		opacity: 0.92;
+		transform: translateY(-1px);
+	}
+
+	.brand:active {
+		transform: scale(0.97);
+	}
+
+	.brand-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		border-radius: 6px;
+		background: var(--brand-badge-bg);
+		color: var(--brand-badge-fg);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+		transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, color 0.3s ease;
+	}
+
+	.brand:hover .brand-badge {
+		transform: scale(1.05);
+	}
+
+	.brand-icon {
+		display: block;
+		width: 12px;
+		height: 12px;
+		stroke-width: 2.5;
+		transition: transform 0.2s ease;
+	}
+
+	.brand:hover .brand-icon {
+		transform: translateY(-1px);
+	}
+
+	.brand-wordmark {
+		display: block;
+		width: 44px;
+		height: auto;
+		color: var(--ink);
+		transition: color 0.3s ease;
+	}
+
+	.nav-right {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.links {
+		display: flex;
+		align-items: center;
+		gap: 3px;
+	}
+
+	.links a {
+		display: inline-flex;
+		align-items: center;
+		padding: 6px 12px;
+		border-radius: 6px;
+		font-family: var(--font-mono), monospace;
+		font-weight: 500;
+		font-size: 13.5px;
+		line-height: 1;
+		color: var(--nav-link-color);
+		text-decoration: none;
+		border: 1px solid transparent;
+		transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+		position: relative;
+	}
+
+	.links a:hover {
+		color: var(--nav-link-hover);
+		background: var(--nav-link-hover-bg);
+		transform: translateY(-1px);
+	}
+
+	.links a:active {
+		transform: scale(0.97);
+	}
+
+	.links a[aria-current='page'] {
+		color: var(--ink);
+		font-weight: 600;
+		background: var(--nav-link-active-bg);
+		border-color: var(--nav-link-active-border);
+	}
+
+	.links a[aria-current='page']:hover {
+		background: var(--nav-link-active-bg);
+		border-color: var(--hairline-strong);
+	}
+
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.btn-contact {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 32px;
+		padding: 0 14px;
+		border-radius: 8px;
+		font-family: var(--font-mono), monospace;
+		font-size: 13px;
+		font-weight: 600;
+		line-height: 1;
+		text-decoration: none;
+		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+	}
+
+	.btn-contact:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+	}
+
+	.btn-contact:active {
+		transform: scale(0.97);
+	}
+
+	/* Mobile Floating Dock */
+	.mobile-dock {
+		display: none;
+	}
+
+	@media (max-width: 768px) {
+		.nav {
+			padding: 10px 14px 4px;
+		}
+
+		.nav-inner {
+			height: 46px;
+			padding: 4px 6px 4px 10px;
+			gap: var(--space-sm);
+		}
+
+		.links {
+			display: none;
+		}
+
+		.nav-right {
+			gap: 6px;
+		}
+
+		.brand {
+			padding: 2px;
+			gap: 8px;
+		}
+
+		.brand-wordmark {
+			width: 38px;
+		}
+
+		.nav-actions {
+			gap: 6px;
+		}
+
+		.btn-contact {
+			height: 30px;
+			padding: 0 10px;
+			font-size: 12px;
+		}
+
+		.mobile-dock {
+			position: fixed;
+			bottom: max(20px, env(safe-area-inset-bottom, 20px));
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 100;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			pointer-events: auto;
+			animation: dock-entrance 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+		}
+
+		.dock-container {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 8px;
+			background: var(--dock-bg);
+			border: 1px solid var(--hairline);
+			border-radius: 9999px;
+			box-shadow: var(--dock-shadow);
+			backdrop-filter: blur(16px) saturate(180%);
+			-webkit-backdrop-filter: blur(16px) saturate(180%);
+			transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.dock-tab {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			height: 42px;
+			min-width: 44px;
+			padding: 0 12px;
+			border-radius: 9999px;
+			color: var(--ink);
+			text-decoration: none;
+			font-family: var(--font-mono), monospace;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1;
+			transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+				color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+				padding 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+				gap 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+				transform 0.15s ease;
+			white-space: nowrap;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		.dock-tab:hover {
+			background: var(--surface-soft);
+		}
+
+		.dock-tab:active {
+			transform: scale(0.96);
+		}
+
+		.dock-icon {
+			display: block;
+			flex-shrink: 0;
+			width: 20px;
+			height: 20px;
+			stroke: currentColor;
+		}
+
+		.dock-label {
+			display: none;
+		}
+
+		/* Active tab becomes the dark/inverted pill with icon and label */
+		.dock-tab.active {
+			background: var(--ink);
+			color: var(--canvas);
+			padding: 0 18px 0 14px;
+			gap: 8px;
+		}
+
+		.dock-tab.active:hover {
+			background: var(--ink-deep);
+		}
+
+		.dock-tab.active .dock-label {
+			display: inline;
+		}
+	}
+
+	@keyframes dock-entrance {
+		from {
+			opacity: 0.5;
+			transform: translate(-50%, 10px);
+		}
+		to {
+			opacity: 1;
+			transform: translate(-50%, 0);
+		}
+	}
+</style>

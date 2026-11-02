@@ -1,0 +1,386 @@
+/* Tokens from DESIGN.md. Every color and spacing value on the site comes from here. */
+:root {
+	--canvas: #fdfcfc;
+	--surface-soft: #f8f7f7;
+	--surface-card: #f1eeee;
+	--hairline: rgba(15, 0, 0, 0.12);
+	--hairline-strong: #646262;
+
+	--ink: #201d1d;
+	--ink-deep: #0f0000;
+	--body: #424245;
+	--mute: #646262;
+
+	--space-xs: 4px;
+	--space-sm: 8px;
+	--space-md: 12px;
+	--space-lg: 16px;
+	--space-xl: 24px;
+	--space-xxl: 32px;
+	--space-section: 96px;
+
+	--radius-sm: 4px;
+	--column: 960px;
+	--gutter: 24px;
+
+	/* Dynamic overlays for chrome */
+	--nav-bar-bg: rgba(255, 255, 255, 0.85);
+	--nav-bar-border: rgba(15, 0, 0, 0.08);
+	--nav-bar-shadow: 0 10px 30px -10px rgba(15, 0, 0, 0.08), 0 1px 3px rgba(15, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+	--nav-link-color: #646262;
+	--nav-link-hover: #18181b;
+	--nav-link-hover-bg: rgba(15, 0, 0, 0.04);
+	--nav-link-active-bg: rgba(15, 0, 0, 0.06);
+	--nav-link-active-border: rgba(15, 0, 0, 0.08);
+	--brand-badge-bg: #18181b;
+	--brand-badge-fg: #ffffff;
+	--theme-toggle-bg: rgba(15, 0, 0, 0.03);
+	--theme-toggle-border: rgba(15, 0, 0, 0.08);
+	--theme-toggle-track: rgba(15, 0, 0, 0.08);
+	--theme-toggle-thumb: #18181b;
+	--dock-bg: rgba(255, 255, 255, 0.85);
+	--dock-shadow: 0 4px 20px rgba(15, 0, 0, 0.08), 0 1px 3px rgba(15, 0, 0, 0.04);
+}
+
+html[data-theme='dark'] {
+	--canvas: #201d1d;
+	--surface-soft: #262323;
+	--surface-card: #302c2c;
+	--hairline: rgba(253, 252, 252, 0.12);
+	--hairline-strong: #787575;
+
+	--ink: #fdfcfc;
+	--ink-deep: #ffffff;
+	--body: #cecbcb;
+	--mute: #9a9898;
+
+	--nav-bar-bg: rgba(18, 19, 23, 0.82);
+	--nav-bar-border: rgba(255, 255, 255, 0.1);
+	--nav-bar-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	--nav-link-color: #9d9da6;
+	--nav-link-hover: #ffffff;
+	--nav-link-hover-bg: rgba(255, 255, 255, 0.06);
+	--nav-link-active-bg: rgba(255, 255, 255, 0.08);
+	--nav-link-active-border: rgba(255, 255, 255, 0.12);
+	--brand-badge-bg: #ffffff;
+	--brand-badge-fg: #09090b;
+	--theme-toggle-bg: rgba(255, 255, 255, 0.05);
+	--theme-toggle-border: rgba(255, 255, 255, 0.12);
+	--theme-toggle-track: rgba(255, 255, 255, 0.14);
+	--theme-toggle-thumb: #ffffff;
+	--dock-bg: rgba(38, 35, 35, 0.85);
+	--dock-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* Smooth theme transition. Skipped under reduced motion, where the reset at
+   the end of this file makes the switch instant. */
+@media (prefers-reduced-motion: no-preference) {
+	html.theme-transition,
+	html.theme-transition *,
+	html.theme-transition *::before,
+	html.theme-transition *::after {
+		transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            fill 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            stroke 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		            opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+		transition-delay: 0s !important;
+	}
+}
+
+@media (max-width: 850px) {
+	:root {
+		--space-section: 64px;
+	}
+}
+
+@media (max-width: 640px) {
+	:root {
+		--space-section: 48px;
+		--gutter: 16px;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+/* Every page fills the screen: nav on top, the page's content in the rest. */
+body {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	background: var(--canvas);
+	color: var(--body);
+	font-family: var(--font-mono), monospace;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	font-style: normal;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex: 1 0 auto;
+	flex-direction: column;
+}
+
+/* Tablet and phone: pages are only as tall as their content. */
+@media (max-width: 1024px) {
+	body {
+		min-height: auto;
+	}
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+pre {
+	margin: 0;
+	padding: 0;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+pre,
+input,
+button {
+	font: inherit;
+}
+
+a {
+	color: var(--ink);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	transition: color 0.15s ease;
+}
+
+strong,
+b {
+	font-weight: 700;
+}
+
+:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 2px;
+}
+
+.container {
+	width: min(100% - 2 * var(--gutter), var(--column));
+	margin-inline: auto;
+}
+
+/* An inner page (About, Skills, …): takes the space under the nav, with its
+   content centred in it. */
+.page {
+	display: flex;
+	flex: 1 0 auto;
+	flex-direction: column;
+	justify-content: center;
+	padding-block: calc(var(--space-section) / 2);
+}
+
+.page h1 {
+	margin-bottom: var(--space-lg);
+	color: var(--ink);
+	font-size: 16px;
+	font-weight: 700;
+	transition: color 0.2s ease;
+}
+
+.prose {
+	display: grid;
+	gap: var(--space-lg);
+	max-width: 68ch;
+}
+
+.prose + ul {
+	margin-top: var(--space-lg);
+}
+
+/* list-row */
+.row {
+	display: grid;
+	grid-template-columns: 3ch 20ch 1fr;
+	column-gap: var(--space-lg);
+	padding-block: var(--space-sm);
+}
+
+.row strong,
+.row dt {
+	color: var(--ink);
+	transition: color 0.2s ease;
+}
+
+.row-pair {
+	grid-template-columns: calc(23ch + var(--space-lg)) 1fr;
+}
+
+.row-pair dt {
+	font-weight: 700;
+}
+
+.row .detail {
+	overflow-wrap: anywhere;
+}
+
+.row strong a {
+	color: inherit;
+}
+
+@media (max-width: 640px) {
+	.row {
+		grid-template-columns: 3ch 1fr;
+	}
+
+	.row .detail {
+		grid-column: 2;
+	}
+
+	.row-pair {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* button-primary / button-secondary */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 20px;
+	border: 1px solid transparent;
+	border-radius: var(--radius-sm);
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 2;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.btn:active {
+	transform: translateY(1px);
+}
+
+.btn-primary {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--canvas);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+	background: var(--ink-deep);
+	border-color: var(--ink-deep);
+}
+
+.btn-secondary {
+	background: color-mix(in srgb, var(--canvas) 92%, transparent);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border-color: var(--hairline-strong);
+	color: var(--ink);
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+	background: var(--surface-card);
+}
+
+/* Animations and View Transitions */
+@view-transition {
+	navigation: auto;
+}
+
+.page {
+	animation: content-enter 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.row {
+	animation: row-enter 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.row:nth-child(1) { animation-delay: 0.03s; }
+.row:nth-child(2) { animation-delay: 0.06s; }
+.row:nth-child(3) { animation-delay: 0.09s; }
+.row:nth-child(4) { animation-delay: 0.12s; }
+.row:nth-child(5) { animation-delay: 0.15s; }
+
+.row span[aria-hidden="true"] {
+	transition: color 0.15s ease;
+}
+
+.row:hover span[aria-hidden="true"] {
+	color: var(--ink);
+}
+
+@keyframes content-enter {
+	from {
+		opacity: 0.4;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes row-enter {
+	from {
+		opacity: 0.4;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 768px) {
+	body {
+		padding-bottom: 84px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-delay: 0s !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
