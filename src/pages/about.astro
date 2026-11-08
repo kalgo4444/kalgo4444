@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/profile';
+
+const facts = [
+	['Name', profile.name],
+	['Role', profile.role],
+	['Age', String(profile.age)],
+	['Based in', profile.location],
+	['Status', 'University student'],
+];
+---
+
+<Layout title="About" description={`About ${profile.name}. ${profile.bio}`}>
+	<h1 class="type text-[28px] leading-normal font-bold text-ink sm:text-[32px] lg:text-[38px]" style="--n: 5">
+		About
+	</h1>
+	<p class="rise mt-2 max-w-[60ch]" style="--i: 1">{profile.bio}</p>
+
+	<div class="mt-8 grid gap-8 lg:grid-cols-2 lg:gap-12">
+		<dl class="reveal border-t border-hairline">
+			{
+				facts.map(([term, value]) => (
+					<div class="border-b border-hairline py-3 sm:grid sm:grid-cols-[8rem_1fr]">
+						<dt class="text-mute">{term}</dt>
+						<dd class="font-medium text-ink">{value}</dd>
+					</div>
+				))
+			}
+		</dl>
+		<ul class="reveal border-t border-hairline">
+			{profile.skills.map((skill) => <li class="border-b border-hairline py-3">[+] {skill}</li>)}
+		</ul>
+	</div>
+</Layout>

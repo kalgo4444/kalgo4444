@@ -1,0 +1,9 @@
+{
+	"permissions": {
+		"deny": ["Bash(rm -rf *)"]
+	},
+	"enabledPlugins": {
+		"ponytail@ponytail": true,
+		"playwright@anthropic-plugin-directory": true
+	}
+}

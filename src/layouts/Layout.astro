@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+import { Font } from 'astro:assets';
+import { ClientRouter, fade } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import { profile } from '../data/profile';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = profile.bio } = Astro.props;
+const pageTitle = title ? `${title} · ${profile.name.split(' ')[0]}` : profile.name;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#fdfcfc" />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>{pageTitle}</title>
+		<script is:inline>
+			// Apply the saved theme before paint, and re-apply it on the document ClientRouter swaps in.
+			const dark = () => localStorage.getItem('theme') === 'dark';
+			document.documentElement.classList.toggle('dark', dark());
+			document.addEventListener('astro:before-swap', (e) =>
+				e.newDocument.documentElement.classList.toggle('dark', dark()),
+			);
+		</script>
+		<Font cssVariable="--font-jetbrains" preload />
+		<ClientRouter />
+	</head>
+	<body class="flex min-h-dvh flex-col bg-canvas lg:h-dvh font-mono text-body antialiased">
+		<!-- Star Surge: persisted so the field keeps flying across page navigations. -->
+		<canvas
+			id="starfield"
+			class="pointer-events-none fixed inset-0 -z-10 size-full"
+			aria-hidden="true"
+			transition:persist></canvas>
+		<div class="scroll-progress" aria-hidden="true"></div>
+		<a
+			href="#main"
+			class="sr-only rounded-sm bg-ink px-3 py-1 text-canvas focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
+		>
+			Skip to content
+		</a>
+		<Nav />
+		<!-- lg+: page is exactly one screen tall; content centers, and scrolls inside main if it ever overflows. -->
+		<main
+			id="main"
+			class="flex flex-1 flex-col lg:overflow-y-auto"
+			transition:animate={fade({ duration: '0.35s' })}
+		>
+			<div class="mx-auto my-auto w-full max-w-240 px-4 pt-12 pb-28 sm:px-6 md:py-16 lg:py-8">
+				<slot />
+			</div>
+		</main>
+		<script>
+			// Stars spawn near the centre and rush outward, accelerating: twinkling points in the
+			// core, streaks at the rim. Drawn in the brand ink colour, so it follows light/dark.
+			const STARS = 200;
+			const canvas = document.getElementById('starfield') as HTMLCanvasElement;
+			const ctx = canvas.getContext('2d')!;
+			const root = document.documentElement;
+			const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			let ink = '';
+			const readInk = () => (ink = getComputedStyle(root).getPropertyValue('--color-ink').trim());
+			readInk();
+			new MutationObserver(readInk).observe(root, {
+				attributes: true,
+				attributeFilter: ['class'],
+			});
+
+			let dpr = 1;
+			let reach = 0; // centre to corner, in canvas px
+			const resize = () => {
+				dpr = Math.min(devicePixelRatio, 2);
+				canvas.width = innerWidth * dpr;
+				canvas.height = innerHeight * dpr;
+				reach = Math.hypot(canvas.width, canvas.height) / 2;
+			};
+			resize();
+			addEventListener('resize', resize);
+
+			// d is the distance from the centre as a fraction of reach.
+			const stars = Array.from({ length: STARS }, () => ({
+				a: Math.random() * Math.PI * 2,
+				d: Math.random(),
+				t: Math.random() * Math.PI * 2,
+			}));
+
+			let last = performance.now();
+			const frame = (now: number) => {
+				const dt = Math.min((now - last) / 1000, 0.05);
+				last = now;
+				const cx = canvas.width / 2;
+				const cy = canvas.height / 2;
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.strokeStyle = ink;
+				ctx.lineCap = 'round';
+				for (const s of stars) {
+					const v = 0.04 + s.d * 0.9;
+					s.d += v * dt;
+					if (s.d > 1) {
+						s.a = Math.random() * Math.PI * 2;
+						s.d = Math.random() * 0.05;
+					}
+					const tail = Math.max(s.d - v * 0.07, 0);
+					const twinkle = s.d < 0.2 ? 0.6 + 0.4 * Math.sin(now / 180 + s.t) : 1;
+					ctx.globalAlpha = Math.min(s.d * 4, 1) * 0.3 * twinkle;
+					ctx.lineWidth = (0.6 + s.d * 1.6) * dpr;
+					const cos = Math.cos(s.a);
+					const sin = Math.sin(s.a);
+					ctx.beginPath();
+					ctx.moveTo(cx + cos * tail * reach, cy + sin * tail * reach);
+					ctx.lineTo(cx + cos * s.d * reach, cy + sin * s.d * reach);
+					ctx.stroke();
+				}
+				if (!reduced) requestAnimationFrame(frame);
+			};
+			requestAnimationFrame(frame);
+		</script>
+	</body>
+</html>
