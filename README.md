@@ -1,16 +1,17 @@
-## Hi there 👋
+# Abdulaziz Abdugafurov
 
-<!--
-**kalgo4444/kalgo4444** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**Software Engineer** · 19 · Tashkent, Uzbekistan
 
-Here are some ideas to get you started:
+Full-stack engineer and university student building web, mobile, and AI-powered products.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Stack
+
+- **Languages:** JavaScript, TypeScript
+- **Front end:** React.js, Next.js
+- **Mobile:** React Native (Expo)
+- **Back end:** NodeJS, NestJS, REST APIs
+- **Databases:** PostgreSQL, SQLite
+
+## Skills
+
+Web Development · Full-Stack Engineering · Software Engineer · AI
