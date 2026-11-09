@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
 ---
 
-<Layout title="Not found" description="This page does not exist.">
-	<h1 class="type text-[28px] leading-normal font-bold text-ink sm:text-[32px] lg:text-[38px]" style="--n: 7">
-		[x] 404
-	</h1>
+<Layout title="Not found" description="This page does not exist." noindex>
+	<PageTitle text="[x] 404" />
 	<p class="rise mt-2" style="--i: 1">
 		This page does not exist. <a href="/" class="text-ink underline underline-offset-4">Go home</a>.
 	</p>
