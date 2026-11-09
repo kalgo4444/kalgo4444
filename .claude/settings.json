@@ -1,6 +1,8 @@
 {
 	"permissions": {
-		"deny": ["Bash(rm -rf *)"]
+		"allow": [],
+		"ask": [],
+		"deny": ["Bash(rm -rf *)", "Read(.env*)"]
 	},
 	"enabledPlugins": {
 		"ponytail@ponytail": true,
