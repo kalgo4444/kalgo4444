@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
 import { profile } from '../data/profile';
 ---
 
@@ -9,12 +10,7 @@ import { profile } from '../data/profile';
 			{profile.age} · {profile.location}
 		</span>
 	</p>
-	<h1
-		class="type rise text-[28px] leading-normal font-bold text-ink sm:text-[32px] lg:text-[38px]"
-		style={`--i: 1; --n: ${profile.name.length}`}
-	>
-		{profile.name}
-	</h1>
+	<PageTitle text={profile.name} order={1} />
 	<p class="rise font-medium text-ink" style="--i: 2">{profile.role}</p>
 	<p class="rise mt-4 max-w-[60ch]" style="--i: 3">{profile.bio}</p>
 	<div class="rise mt-8 flex flex-wrap gap-3" style="--i: 4">

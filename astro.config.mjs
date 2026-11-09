@@ -4,6 +4,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://abdulaziz-abdugafurov.vercel.app',
+	// Preload links on hover/focus so ClientRouter navigations feel instant.
+	prefetch: { prefetchAll: true },
 	// Self-hosted JetBrains Mono: the open substitute DESIGN.md names for Berkeley Mono.
 	fonts: [
 		{

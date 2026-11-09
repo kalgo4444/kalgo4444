@@ -1,12 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
 import { profile } from '../data/profile';
 ---
 
 <Layout title="Contact" description={`Contact ${profile.name}.`}>
-	<h1 class="type text-[28px] leading-normal font-bold text-ink sm:text-[32px] lg:text-[38px]" style="--n: 7">
-		Contact
-	</h1>
+	<PageTitle text="Contact" />
 	<p class="rise mt-2 max-w-[60ch]" style="--i: 1">
 		Building something for the web or mobile? Send me a message.
 	</p>
