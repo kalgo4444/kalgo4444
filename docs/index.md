@@ -1,24 +1,21 @@
 # Abdulaziz Abdugafurov
+**Software Engineer** · 19 · Tashkent, Uzbekistan
 
-**Full-Stack engineer** · 19 · Tashkent, Uzbekistan
+I study software engineering at university, and I gained my core knowledge and practical experience through internships at IT companies and by teaching web development to students. I focus on explaining complex concepts in simple terms. During my classes, I have worked closely with students to build everything from simple projects to large, real-world applications.
 
-Full-stack engineer and university student building web, mobile, and AI-powered products.
+I also spend a lot of time thinking about how developers can use AI well. There’s a big difference between adding an LLM to an application and building something that developers can actually rely on.
 
 ## Stack
-
-- **Languages:** JavaScript, TypeScript
+- **Languages:** JavaScript, TypeScript, Python
 - **Front end:** React.js, Next.js
-- **Mobile:** React Native (Expo)
-- **Back end:** NodeJS, NestJS, REST APIs
+- **Back end:** NodeJS, NestJS
 - **Databases:** PostgreSQL, SQLite
+- **Tools:** Local LLMs, Ollama, AI agents, MCP
 
 ## Skills
-
-Web Development · Full-Stack Engineering · Software Engineer · AI
+Web Development · Full-Stack Engineering · Software Engineer
 
 ## Contact
-
-Building something for the web or mobile? Send me a message.
 
 - **GitHub:** github.com/kalgo4444
 - **LinkedIn:** linkedin.com/in/abdulaziz-abdugafurov
