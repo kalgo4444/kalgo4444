@@ -6,11 +6,12 @@ Full-stack engineer and university student building web, mobile, and AI-powered 
 
 ## Stack
 
-- **Languages:** JavaScript, TypeScript
+- **Languages:** JavaScript, TypeScript, Python
 - **Front end:** React.js, Next.js
 - **Mobile:** React Native (Expo)
-- **Back end:** NodeJS, NestJS, REST APIs
+- **Back end:** NodeJS, NestJS
 - **Databases:** PostgreSQL, SQLite
+- ** Tools:** Local LLMs, Ollama, AI agents, MCP, Claude Code, OpenCode
 
 ## Skills
 
