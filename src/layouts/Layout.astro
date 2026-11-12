@@ -57,17 +57,20 @@ const person = {
 		<link rel="icon" href="/favicon.ico" />
 		<title>{pageTitle}</title>
 		<script is:inline>
-			// Apply the saved theme before paint, and re-apply it on the document ClientRouter swaps in.
-			const dark = () => localStorage.getItem('theme') === 'dark';
-			document.documentElement.classList.toggle('dark', dark());
-			document.addEventListener('astro:before-swap', (e) =>
-				e.newDocument.documentElement.classList.toggle('dark', dark()),
-			);
+			// Apply the saved theme (root class and browser chrome colour) before paint, on the
+			// document ClientRouter swaps in, and when ThemeToggle flips it.
+			const applyTheme = (doc = document) => {
+				const dark = localStorage.getItem('theme') === 'dark';
+				doc.documentElement.classList.toggle('dark', dark);
+				doc.querySelector('meta[name="theme-color"]').content = dark ? '#201d1d' : '#fdfcfc';
+			};
+			applyTheme();
+			document.addEventListener('astro:before-swap', (e) => applyTheme(e.newDocument));
 		</script>
 		<Font cssVariable="--font-jetbrains" preload />
 		<ClientRouter />
 	</head>
-	<body class="flex min-h-dvh flex-col bg-canvas lg:h-dvh font-mono text-body antialiased">
+	<body class="flex min-h-dvh flex-col bg-canvas font-mono text-body antialiased lg:h-dvh">
 		<Starfield />
 		<div class="scroll-progress" aria-hidden="true"></div>
 		<a

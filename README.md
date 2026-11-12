@@ -13,4 +13,4 @@ I also spend a lot of time thinking about how developers can use AI well. There�
 - **Tools:** Local LLMs, Ollama, AI agents, MCP
 
 ## Skills
-Web Development · Full-Stack Engineering · Software Engineer
+Web Development · Full-Stack Development · Software Engineer

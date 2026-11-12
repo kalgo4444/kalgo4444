@@ -2,7 +2,7 @@
 	type="button"
 	data-theme-toggle
 	aria-label="Toggle dark mode"
-	class="inline-flex size-11 items-center justify-center rounded-lg text-mute transition-transform hover:text-ink motion-safe:active:scale-90 md:size-10 max-md:rounded-full"
+	class="inline-flex size-11 items-center justify-center rounded-sm text-mute transition-transform hover:text-ink motion-safe:active:scale-90 md:size-10"
 >
 	<svg
 		viewBox="0 0 24 24"
@@ -35,12 +35,15 @@
 </button>
 
 <script>
+	// Global from the inline script in Layout.astro.
+	declare const applyTheme: () => void;
+
 	document.addEventListener('click', (e) => {
 		if (!(e.target as Element).closest('[data-theme-toggle]')) return;
 		const root = document.documentElement;
 		root.classList.add('theme-fade');
 		setTimeout(() => root.classList.remove('theme-fade'), 450);
-		const dark = root.classList.toggle('dark');
-		localStorage.setItem('theme', dark ? 'dark' : 'light');
+		localStorage.setItem('theme', root.classList.contains('dark') ? 'light' : 'dark');
+		applyTheme();
 	});
 </script>

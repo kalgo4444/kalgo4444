@@ -201,11 +201,5 @@ html.dark {
 	height: 2px;
 	background: var(--color-ink);
 	transform-origin: left;
-	scale: 0 1;
-}
-
-@supports not (animation-timeline: scroll()) {
-	.scroll-progress {
-		display: none;
-	}
+	scale: 0 1; /* stays collapsed without scroll-timeline support or with reduced motion */
 }

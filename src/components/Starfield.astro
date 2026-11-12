@@ -12,11 +12,13 @@
 	const ctx = canvas.getContext('2d')!;
 	const root = document.documentElement;
 	const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+	// Reduced motion has no loop, so a theme switch or resize must repaint the still frame.
+	const repaint = () => reduced && requestAnimationFrame(frame);
 
 	let ink = '';
 	const readInk = () => (ink = getComputedStyle(root).getPropertyValue('--color-ink').trim());
 	readInk();
-	new MutationObserver(readInk).observe(root, {
+	new MutationObserver(() => (readInk(), repaint())).observe(root, {
 		attributes: true,
 		attributeFilter: ['class'],
 	});
@@ -30,7 +32,7 @@
 		reach = Math.hypot(canvas.width, canvas.height) / 2;
 	};
 	resize();
-	addEventListener('resize', resize);
+	addEventListener('resize', () => (resize(), repaint()));
 
 	// d is the distance from the centre as a fraction of reach.
 	const stars = Array.from({ length: STARS }, () => ({

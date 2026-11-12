@@ -1,12 +1,15 @@
 {
-	"permissions": {
-		"allow": [],
-		"ask": [],
-		"deny": ["Bash(rm -rf *)", "Read(.env*)"]
-	},
-	"enabledPlugins": {
-		"ponytail@ponytail": true,
-		"playwright@anthropic-plugin-directory": true,
-		"context7@anthropic-plugin-directory": true
-	}
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Read(.env*)"
+    ],
+    "ask": []
+  },
+  "enabledPlugins": {
+    "ponytail@ponytail": true,
+    "playwright@anthropic-plugin-directory": true,
+    "frontend-design@anthropic-plugin-directory": true
+  }
 }
