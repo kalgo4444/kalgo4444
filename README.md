@@ -11,7 +11,7 @@ I also spend a lot of time thinking about how developers can use AI well. There�
 - **Mobile:** React Native (Expo)
 - **Back end:** NodeJS, NestJS
 - **Databases:** PostgreSQL, SQLite
-- ** Tools:** Local LLMs, Ollama, AI agents, MCP, Claude Code, OpenCode
+- **Tools:** Local LLMs, Ollama, AI agents, MCP, Claude Code, OpenCode
 
 ## Skills
 Web Development · Full-Stack Engineering · Software Engineer · AI
