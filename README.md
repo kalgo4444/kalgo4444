@@ -8,10 +8,9 @@ I also spend a lot of time thinking about how developers can use AI well. There�
 ## Stack
 - **Languages:** JavaScript, TypeScript, Python
 - **Front end:** React.js, Next.js
-- **Mobile:** React Native (Expo)
 - **Back end:** NodeJS, NestJS
 - **Databases:** PostgreSQL, SQLite
-- **Tools:** Local LLMs, Ollama, AI agents, MCP, Claude Code, OpenCode
+- **Tools:** Local LLMs, Ollama, AI agents, MCP
 
 ## Skills
-Web Development · Full-Stack Engineering · Software Engineer · AI
+Web Development · Full-Stack Engineering · Software Engineer
