@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Tokens from DESIGN.md. JetBrains Mono stands in for the paid Berkeley Mono. */
+@theme inline {
+  --font-mono:
+    var(--font-jetbrains-mono), "IBM Plex Mono", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@theme {
+  --color-ink: #201d1d;
+  --color-ink-deep: #0f0000;
+  --color-body: #424245;
+  --color-mute: #646262;
+  --color-ash: #9a9898;
+  --color-canvas: #fdfcfc;
+  --color-surface-card: #f1eeee;
+  --color-hairline: rgba(15, 0, 0, 0.12);
+  --color-accent: #007aff;
+
+  --text-display: clamp(28px, 6vw, 38px);
+  --text-display--line-height: 1.5;
+  --text-display--font-weight: 700;
+  --text-caption: 14px;
+  --text-caption--line-height: 2;
+
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-rise: rise 0.5s var(--ease-smooth) both;
+  --animate-fade: fade 0.35s var(--ease-smooth) both;
+  --animate-wipe: wipe 1s cubic-bezier(0.76, 0, 0.24, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes wipe {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+  }
+}
+
+/* Phone and tablet scroll: page blocks rise as they enter the viewport (browsers without scroll timelines just play the entrance). */
+@supports (animation-timeline: view()) {
+  @media (width < 64rem) {
+    main .animate-rise {
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+/* Dark mode swaps the same tokens, so no component needs dark: classes. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  color-scheme: dark;
+  --color-ink: #fdfcfc;
+  --color-ink-deep: #ffffff;
+  --color-body: #c9c7c7;
+  --color-mute: #9a9898;
+  --color-ash: #6e6e73;
+  --color-canvas: #201d1d;
+  --color-surface-card: #302c2c;
+  --color-hairline: rgba(253, 252, 252, 0.14);
+  --color-accent: #4da3ff;
+}
+
+@utility frame {
+  @apply mx-auto w-full max-w-[1100px] px-4 md:px-8;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* motion/react handles reduced motion itself; this covers the CSS transitions and animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    /* biome-ignore lint/complexity/noImportantStyles: must beat Tailwind's transition utilities */
+    transition-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must beat Tailwind's animate-* utilities */
+    animation: none !important;
+  }
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}

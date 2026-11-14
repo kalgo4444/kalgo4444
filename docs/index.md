@@ -1,5 +1,5 @@
 # Abdulaziz Abdugafurov
-**Software Engineer** · 19 · Tashkent, Uzbekistan
+**Software Engineer** · Tashkent, Uzbekistan
 
 I study software engineering at university, and I gained my core knowledge and practical experience through internships at IT companies and by teaching web development to students. I focus on explaining complex concepts in simple terms. During my classes, I have worked closely with students to build everything from simple projects to large, real-world applications.
 
