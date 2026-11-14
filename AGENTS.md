@@ -7,6 +7,7 @@ Bun lockfile (`bun.lock`) is checked in; Node >=22.23.4.
 - `bun run dev` — dev server (`astro dev`)
 - `bun run build` — static build to `dist/`
 - `bun run preview` — serve the built site
+- `docker compose up --build` — build on Node 24 and serve `dist/` with nginx on http://localhost:8080
 
 There is no test, lint, or typecheck script (`@astrojs/check` is not installed), so `bun run build` is the only automated check. Formatting is Prettier (`.prettierrc`: tabs, single quotes, semicolons).
 
