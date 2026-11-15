@@ -1,10 +1,7 @@
 {
   "permissions": {
     "allow": [],
-    "deny": [
-      "Bash(rm -rf *)",
-      "Read(.env*)"
-    ],
+    "deny": ["Bash(rm -rf *)", "Read(.env*)"],
     "ask": []
   },
   "enabledPlugins": {
