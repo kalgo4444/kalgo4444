@@ -3,6 +3,7 @@ import Script from "next/script";
 import { siteMetadata } from "@/entities/profile";
 import { THEME_STORAGE_KEY } from "@/features/theme-toggle";
 import { ScrollProgress } from "@/shared/ui/scroll-progress";
+import { MobileDock } from "@/widgets/mobile-dock";
 import { SiteHeader } from "@/widgets/site-header";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -32,10 +33,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Providers>
           <ScrollProgress />
           <SiteHeader />
-          {/* Scrolls inside itself only if a short laptop screen can't fit the page. */}
-          <main className="grid flex-1 grid-cols-1 lg:min-h-0 lg:overflow-y-auto">
+          {/* Scrolls inside itself only if a short laptop screen can't fit the page. Bottom padding clears the dock. */}
+          <main className="grid flex-1 grid-cols-1 pb-28 lg:min-h-0 lg:overflow-y-auto lg:pb-0">
             {children}
           </main>
+          <MobileDock />
         </Providers>
       </body>
     </html>
