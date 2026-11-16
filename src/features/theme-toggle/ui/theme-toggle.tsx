@@ -7,17 +7,10 @@ type ThemeToggleProps = {
   toDark: string;
   /** Label shown in dark mode, offering to switch back. */
   toLight: string;
-  /** Optional list-style marker rendered before the label. */
-  marker?: string;
   className?: string;
 };
 
-export function ThemeToggle({
-  toDark,
-  toLight,
-  marker,
-  className,
-}: ThemeToggleProps) {
+export function ThemeToggle({ toDark, toLight, className }: ThemeToggleProps) {
   const handleToggle = () => {
     const isDark = document.documentElement.classList.toggle("dark");
     try {
@@ -34,7 +27,6 @@ export function ThemeToggle({
       aria-label="Toggle dark mode"
       className={`cursor-pointer ${className}`}
     >
-      {marker && <span aria-hidden="true">{marker}</span>}
       {/* Label swaps with CSS on the html.dark class, so there is no state to hydrate. */}
       <span className="dark:hidden">{toDark}</span>
       <span className="hidden dark:inline">{toLight}</span>

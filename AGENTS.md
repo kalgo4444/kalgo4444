@@ -29,7 +29,7 @@ Layers, each importing only from layers below it: `app` → `views` → `widgets
 ### Single sources of truth
 
 - **Content:** `entities/profile/model/profile.ts` mirrors `docs/index.md`. Never hard-code names, links or stack items in components.
-- **Routes:** `NAV_ITEMS` in `shared/config/routes.ts` holds each page's href, label, title and description. It drives the desktop nav, the mobile drawer, `pageMetadata()` and `app/sitemap.ts`. To add a page, add a `NAV_ITEMS` entry, a view and an `app/<route>/page.tsx`.
+- **Routes:** `NAV_ITEMS` in `shared/config/routes.ts` holds each page's href, label, title and description. It drives the desktop nav, the mobile dock, `pageMetadata()` and `app/sitemap.ts`. To add a page, add a `NAV_ITEMS` entry, a view and an `app/<route>/page.tsx`.
 - **SEO:** `entities/profile/model/metadata.ts` has `siteMetadata` for the root layout and `pageMetadata(href)` for each page. Next.js replaces nested metadata objects such as `openGraph` instead of merging them, so `pageMetadata` re-spreads the shared Open Graph base on every page. The Person JSON-LD is rendered only on the home page.
 - **Generated images:** `app/icon.tsx` and `app/opengraph-image.tsx` render `PixelWordmark` with `ImageResponse`. In these files, any `<div>` with more than one child needs `display: "flex"`, or the build fails.
 - **Wordmark glyphs:** `PixelWordmark` only defines the glyphs A, B, D, I, L, U and Z. Any other letter is silently skipped.
@@ -44,8 +44,8 @@ Layers, each importing only from layers below it: `app` → `views` → `widgets
   - `app/template.tsx` remounts on every navigation and replays `.animate-fade`.
   - The home wordmark uses `.animate-wipe`.
   - The keyframes live in `globals.css`. On phones and tablets, `main .animate-rise` becomes a scroll-driven reveal (`animation-timeline: view()`) in browsers that support it.
-- **Motion library:** used only in client components (header hide/show, mobile drawer, nav underline, scroll progress). `app/providers.tsx` wraps the app in `LazyMotion strict` and lazy-loads `domMax`, so you must use `import * as m from "motion/react-m"` (`m.div`). A full `motion.*` import throws.
-- **Theme:** design tokens are `@theme` variables in `globals.css`, and dark mode overrides the same variables under `.dark`. Components therefore rarely need `dark:` variants. Light is the default. An inline `beforeInteractive` script in the root layout applies a saved `"dark"` choice from `localStorage` before first paint. The toggle (`features/theme-toggle`) swaps its label with CSS only, so it has no React state.
+- **Motion library:** used only in client components (header hide/show, mobile dock bubble, nav underline, scroll progress). `app/providers.tsx` wraps the app in `LazyMotion strict` and lazy-loads `domMax`, so you must use `import * as m from "motion/react-m"` (`m.div`). A full `motion.*` import throws.
+- **Theme:** design tokens are `@theme` variables in `globals.css`, and dark mode overrides the same variables under `.dark`. Components therefore rarely need `dark:` variants. Light is the default. A plain inline `<script>` in the root layout's `<head>` (not `next/script`, which defers inline code until hydration) applies a saved `"dark"` choice from `localStorage` before first paint. The toggle (`features/theme-toggle`) swaps its label with CSS only, so it has no React state.
 
 ## Design rules (`DESIGN.md`)
 
@@ -56,3 +56,13 @@ Layers, each importing only from layers below it: `app` → `views` → `widgets
 - Reuse `buttonClass()` from `shared/ui/button-link.tsx` for any button-styled element, and `externalLinkProps(href)` for off-site links.
 
 Next.js and React coding conventions are in `.claude/rules/nextjs.rule.md`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
