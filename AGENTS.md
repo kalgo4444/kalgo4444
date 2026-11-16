@@ -55,8 +55,6 @@ Layers, each importing only from layers below it: `app` → `views` → `widgets
 - 4px radius on interactive elements, 0 on containers, 1px hairline borders, no shadows or gradients.
 - Reuse `buttonClass()` from `shared/ui/button-link.tsx` for any button-styled element, and `externalLinkProps(href)` for off-site links.
 
-Next.js and React coding conventions are in `.claude/rules/nextjs.rule.md`.
-
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know
