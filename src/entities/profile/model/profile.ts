@@ -7,17 +7,17 @@ export const profile = {
   lastName,
   name: `${firstName} ${lastName}`,
   username: "kalgo4444",
-  role: "Software Engineer",
+  role: "Full-Stack Engineer",
   city: "Tashkent",
   country: "Uzbekistan",
   location: "Tashkent, Uzbekistan",
   tagline: "I build for the web and teach others to do the same.",
   bio: [
-    "I study software engineering at university, and I gained my core knowledge and practical experience through internships at IT companies and by teaching web development to students. I focus on explaining complex concepts in simple terms. During my classes, I have worked closely with students to build everything from simple projects to large, real-world applications.",
+    "I study Full-Stack engineer, and I gained my core knowledge and practical experience through internships at IT companies and by teaching web development to students. I focus on explaining complex concepts in simple terms. During my classes, I have worked closely with students to build everything from simple projects to large, real-world applications.",
     "I also spend a lot of time thinking about how developers can use AI well. There's a big difference between adding an LLM to an application and building something that developers can actually rely on.",
   ],
   highlights: [
-    { label: "Studying", text: "Software engineering at university" },
+    { label: "Studying", text: "Full-Stack engineering" },
     { label: "Interning", text: "Practical experience at IT companies" },
     {
       label: "Teaching",

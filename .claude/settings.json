@@ -8,8 +8,5 @@
     ],
     "ask": []
   },
-  "enabledPlugins": {
-    "frontend-design@anthropic-plugin-directory": true,
-    "playwright@anthropic-plugin-directory": true
-  }
+  "enabledPlugins": {}
 }

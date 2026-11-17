@@ -4,14 +4,14 @@ export const NAV_ITEMS = [
     label: "Home",
     title: undefined,
     description:
-      "Software engineer in Tashkent, Uzbekistan, building web apps with React, Next.js and NestJS and teaching web development.",
+      "Full-Stack engineer in Tashkent, Uzbekistan, building web apps with React, Next.js and NestJS and teaching web development.",
   },
   {
     href: "/about",
     label: "About",
     title: "About",
     description:
-      "How I learned software engineering through internships and teaching, and how I think about building with AI.",
+      "How I learned full-stack engineering through internships and teaching, and how I think about building with AI.",
   },
   {
     href: "/stack",
