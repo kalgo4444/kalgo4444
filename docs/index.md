@@ -17,10 +17,3 @@ I also spend a lot of time thinking about how developers can use AI well. There�
 ## Skills
 
 Web Development · Full-Stack Development · Software Engineer
-
-## Contact
-
-- **GitHub:** github.com/kalgo4444
-- **LinkedIn:** linkedin.com/in/abdulaziz-abdugafurov
-- **Telegram:** t.me/abdulaziz_abdugafurov
-- **Email:** abuxyziabd@gmail.com

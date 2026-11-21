@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/audits
 /node_modules
 /.pnp
 .pnp.*
@@ -10,7 +9,6 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-.playwright-mcp
 
 # testing
 /coverage

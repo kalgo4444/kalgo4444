@@ -1,12 +1,17 @@
 {
   "permissions": {
-    "allow": [],
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Bash"
+    ],
+    "ask": [],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
-      "Read(.env*)"
-    ],
-    "ask": []
+      "Read(.env)"
+    ]
   },
   "enabledPlugins": {}
 }
