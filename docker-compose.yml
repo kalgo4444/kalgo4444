@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    image: kalgo4444:latest
+    container_name: kalgo4444
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
