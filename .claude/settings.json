@@ -1,11 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Read",
-      "Edit",
-      "Write",
-      "Bash"
-    ],
+    "allow": [],
     "ask": [],
     "deny": [
       "Bash(rm -rf *)",
